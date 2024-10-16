@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% block head %}
+    <link rel="stylesheet" href="./../static/css/style_inscription.css">
+{% endblock head %}
+
+
+{% block body%}
+<!--Entete-->
+    <div class="page-content">
+        <div class="form-v9-content" style="background-image: url('images/form-v9.jpg')">
+            <!--Form création d'annonce-->
+            <form class="form-detail" action="/creeroffre" method="post" enctype="multipart/form-data">
+                <h2>Publier une nouvelle annonce</h2>
+                <div>
+                    <label for="comment" class="block text-sm font-medium text-black-700">Nom du produit vendu</label>
+                    <div class="mt-1">
+                      <textarea rows="1" name="annonce" id="annonce" style="color: black;" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" required></textarea>
+                    </div>
+                </div>
+                <div>
+                    <label for="comment" class="block text-sm font-medium text-black-700">Description détaillée</label>
+                    <div class="mt-1">
+                        <textarea rows="4" name="description" id="description" style="color: black;" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" required></textarea>
+                    </div>
+                </div>
+                <div>
+                    <label for="comment" class="block text-sm font-medium text-black-700">Prix (en euros)</label>
+                    <div class="mt-1">
+                        <textarea rows="1" name="prix" id="prix" style="color: black;" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" required></textarea>
+                    </div>
+                </div>
+                <div>
+                    <label for="comment" class="block text-sm font-medium text-black-700">Ajoutez votre localisation</label>
+                    <div class="mt-1">
+                        <textarea rows="1" name="localisation" id="localisation" style="color: black;" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" required></textarea>
+                    </div>
+                </div>
+                <div class="block text-sm font-medium text-black-700">
+                Ajoutez une image
+                </div>
+                <input type="file" name="image" id="image" accept="image/*" style="color: rgb(255, 255, 255);" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                
+                <div class="form-row-last">
+                    <input type="submit" name="creeroffre" class="register" value="Publier">
+                </div>
+                
+                
+            </form>
+        </div>
+    </div>
+
+{% endblock body %}

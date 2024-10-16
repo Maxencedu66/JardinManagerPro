@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="../static/css/style_forum.css">
+{% endblock head %}
+
+{% block body %}
+    <!--Entete-->
+    <div class="page-content">
+        <div class="form-v9-content" style="background-image: url('images/form-v9.jpg')">
+            <div class="form-detail">
+                <h2>Jardin Copain</h2>
+                <h2 style="font-size:20px;">Ici, échangez vos idées et astuces de jardinage</h2>
+                
+            </div>
+            <!--Bouton créer un sujet-->
+            <div style="margin-bottom:20px;" class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700">
+                <a href='creersujet'>Créer un sujet</a>
+            </div>
+            <!--Barre de recherche-->
+            <input style= "margin-bottom:20px;" type="text" id="myInput" onkeyup="myFunction()" placeholder="Rechercher un sujet..">
+            <!--Table-->
+            <table style="width:1200px;"id = "myTable" class="container">
+                <thead>
+                    <tr>
+                        <th><h1>Sujet</h1></th>
+                        <th><h1>Message</h1></th>
+                        <th><h1>Auteur</h1></th>
+                        <th><h1>Date</h1></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in listdb %}
+                        <tr> 
+                            <td style="max-width: 240px; overflow: auto; word-wrap: break-word; text-overflow: ellipsis"><a href='reponsesujet?sujet={{ row[0] }}&pseudo={{ row[2] }}&message={{ row[1] }}&date={{ row[3] }}'>{{ row[0][:50] }}</a></td>
+                            <td style="max-width: 450px; overflow: auto; word-wrap: break-word; text-overflow: ellipsis">{{ row[1][:50]|safe }}..</td>
+                            <td style="width: 200px; overflow: auto; word-wrap: break-word; text-overflow: ellipsis"><a href='user/{{ row[2] }}'>{{ row[2] }}</a></td>
+                            <td style="max-width:200px;">{{ row[3] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <!--script js pour rechercher dans la table-->
+            <script>
+                function myFunction() {
+                    var input, filter, table, tr, td, i, txtValue;
+                    input = document.getElementById("myInput");
+                    filter = input.value.toUpperCase();
+                    table = document.getElementById("myTable");
+                    tr = table.getElementsByTagName("tr");
+                    for (i = 0; i < tr.length; i++) {
+                        td = tr[i].getElementsByTagName("td")[0];
+                        if (td) {
+                            txtValue = td.textContent || td.innerText;
+                            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";}
+                        else {
+                            tr[i].style.display = "none";
+                        }
+                        }
+                    }
+                }
+            </script>
+        </div>
+    </div>
+    
+{% endblock body %}

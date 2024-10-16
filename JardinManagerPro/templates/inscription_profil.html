@@ -1,0 +1,41 @@
+{% extends "layout.html" %} 
+
+{% block head %}
+    <link rel="stylesheet" href="./../static/css/style_inscription.css">
+{% endblock %}
+
+
+
+{% block profil %}
+    <div class="page-content">
+        <div class="form-v9-content" style="background-image: url('images/form-v9.jpg')">
+            <form class="form-detail" action="/inscription" method="post" enctype="multipart/form-data">
+                <h2>S'inscrire</h2>
+                <div class="form-row-total">
+                    <div class="form-row">
+                        <input autocomplete="off" autofocus type="text" name="pseudo" id="pseudo" class="input-text" placeholder="Pseudo" required>
+                    </div>
+                    <div class="form-row">
+                        <input autocomplete="off" autofocus type="text" name="mail" id="mail" class="input-text" placeholder="Email" required pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}">
+                    </div>
+                </div>
+                <div class="form-row-total">
+                    <div class="form-row">
+                        <input autocomplete="off" autofocus type="password" name="mdp" id="mdp" class="input-text" placeholder="Mot de passe" required>
+                    </div>  
+                    <div class="form-row">
+                        <input autocomplete="off" autofocus type="password" name="conf_mdp" id="conf_mdp" class="input-text" placeholder="Confirmez le mot de passe" required>
+                    </div>
+                </div>
+                <div class="form-row-connexion">
+                    <div class="form-row">
+                        <input autocomplete="off" autofocus type="text" name="ville" id="ville" class="input-text" placeholder="Ville" required>
+                    </div>
+                </div>
+                <div class="form-row-last">
+                    <input type="submit" name="S'inscrire" class="register" value="S'inscrire">
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock profil %}

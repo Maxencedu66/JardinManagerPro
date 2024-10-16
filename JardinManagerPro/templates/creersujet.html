@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="./../static/css/style_inscription.css">
+{% extends "layout.html" %}
+
+{% block body%}
+<!--Entete-->
+<body class="form-v9">
+    <div class="page-content">
+        <div class="form-v9-content" style="background-image: url('images/form-v9.jpg')">
+            <!--Form création de sujet-->
+            <form class="form-detail" action="/creersujet" method="post">
+                <h2>Créer un nouveau sujet</h2>
+                <div>
+                    <label for="comment" class="block text-sm font-medium text-black-700">Nom de votre sujet</label>
+                    <div class="mt-1">
+                      <textarea rows="1" name="sujet" id="sujet" style="color: black;" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" required></textarea>
+                    </div>
+                </div>
+                <div>
+                    <label for="comment" class="block text-sm font-medium text-black-700">Ajoutez votre message</label>
+                    <div class="mt-1">
+                      <textarea rows="4" name="message" id="message" style="color: black;" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" required></textarea>
+                    </div>
+                </div>
+                <div class="form-row-last">
+                    <input type="submit" name="creersujet" class="register" value="Publier">
+                </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock body %}

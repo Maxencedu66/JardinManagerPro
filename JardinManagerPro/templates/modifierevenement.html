@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    <link rel="stylesheet" href="./../static/css/style_inscription.css">
+{% endblock head %}
+
+{% block body %}
+    <div class="page-content">
+        <div style="text-align:center"class="form-v9-content" style="background-image: url('images/form-v9.jpg')">
+            <div class="form-detail" >
+                <h2>Modifier un évènement</h2>  
+            </div>
+        
+            <form class="form-detail" action="/modifierevenement/{{ id }}" method="post" enctype="multipart/form-data">
+                <label for="comment" >Titre de l'évènement</label>
+                <div class="form-row-maj">
+                    
+                    <input autocomplete="off" autofocus type="text" name="titre" id="titre" class="input-text" placeholder="Donnez un titre à l'évènement" required>
+                </div>
+
+                <label for="comment" >Date de début</label>
+                <div class="form-row-maj">
+                    <input autocomplete="off" autofocus type="text" name="debut" id="debut" class="input-text" placeholder="Date de début (JJ/MM/AAAA)" required>
+                </div>
+                <label for="comment" >Date de fin</label>
+                <div class="form-row-maj">
+                    <input autocomplete="off" autofocus type="text" name="fin" id="fin" class="input-text" placeholder="Date de fin (JJ/MM/AAAA)" required>
+                </div>
+                <div>
+                    <label for="comment" >Donnez une description</label>
+                    <div class="mt-1" style="padding-top:10px">
+                        <textarea rows="5" name="description" style="color:black" id="description" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"></textarea>
+                    </div>
+                    </div>
+                <div>
+                    <input type="submit" name="enregistrer" style="width:300px" class="register" value="Modifier l'évènement">
+                </div>
+            </form>
+            <div>
+                <a href="/jardin">Annuler</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}  

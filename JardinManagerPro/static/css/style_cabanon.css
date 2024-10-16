@@ -1,0 +1,32 @@
+html{
+    color : #ffffff;
+    }
+
+
+.annonce{
+    padding:0.5cm 0.5cm 0.5cm 1cm;
+    clear:both;
+    border: solid;
+    overflow:auto;
+    border-radius: 80px 80px;
+    margin: 1cm 1cm;
+
+}
+
+
+.img_annonce{
+    
+    float:left;
+    width: 360px ;
+    height: 230px;
+    clear:both;
+    padding-right: 1cm;
+    border-radius: 30px 30px;
+    
+    
+
+}
+
+.text_annonce{
+    float:right;
+}

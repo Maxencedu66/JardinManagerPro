@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    
+    <link rel="stylesheet" href="../static/css/style_forum.css">
+    
+{% endblock head %}
+
+{% block body %}
+<!--Entete-->
+    <div class="page-content">
+        <div class="form-v9-content" style="background-image: url('images/form-v9.jpg')">
+            <div class="form-detail">
+                <h2>Le Cabanon</h2>
+                <h2 style="font-size:20px;"> Vendez ou achetez vos produits locaux </h2>
+            </div>
+            <!--Bouton créer une offre-->
+            <div style="margin-bottom:20px;" class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700">
+                <a href='creeroffre'>Créer une offre</a>
+            </div>
+            <!--Barre de recherche-->
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Rechercher un produit..">
+            <!--Form pour trier les prix-->
+            <form method="post" action="/cabanon">
+                <label for="prix_min">Prix minimum :</label>
+                    <div class="relative mt-1 rounded-md shadow-sm">
+                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                            <span class="text-gray-500 sm:text-sm">€</span>
+                        </div>
+                        <input value ="{{ prix_min }}"style="color:black" type="number" name="prix_min" id="prix_min" class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="0.00" required>
+                            <div class="absolute inset-y-0 right-0 flex items-center">
+                                <label for="currency" class="sr-only">Currency</label>
+                                    <select id="currency" name="currency" class="h-full rounded-md border-transparent bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                        <option>EUR</option>
+                                    </select>
+                            </div>
+                    </div>
+                <label for="prix_min">Prix maximum :</label>
+                    <div class="relative mt-1 rounded-md shadow-sm">
+                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                            <span class="text-gray-500 sm:text-sm">€</span>
+                        </div>
+                        <input value ="{{ prix_max }}"style="color:black; margin-bottom:20px;" type="number" name="prix_max" id="prix_max" class="block w-full rounded-md border-gray-300 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="0.00" required>
+                            <div class="absolute inset-y-0 right-0 flex items-center">
+                                <label for="currency" class="sr-only">Currency</label>
+                                    <select id="currency" name="currency" class="h-full rounded-md border-transparent bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                        <option>EUR</option>
+                                    </select>
+                            </div>
+                    </div>
+                <div style="margin-bottom:20px;" class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700">
+                    <input type="submit" value="Filtrer">
+                </div>
+            </form>
+            <!--Table-->
+            <table id = "myTable" class="container">
+                <thead>
+                    <tr>
+                        <th><h1>Annonce</h1></th>
+                        <th><h1>Prix (en euros)</h1></th>
+                        <th><h1>Localisation</h1></th>
+                        <th><h1>Auteur</h1></th>
+                        <th><h1>Date</h1></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in listdb %}
+                        <tr> 
+                            <td style="max-width: 240px; overflow: auto; word-wrap: break-word; text-overflow: ellipsis"><a href='annonce?annonce={{ row[0] }}&pseudo={{ row[3] }}'>{{ row[0][:50] }}</a></td>
+                            <td style="max-width: 150px; overflow: auto; word-wrap: break-word; text-overflow: ellipsis">{{ row[1] }} €</td>
+                            <td style="max-width: 150px; overflow: auto; word-wrap: break-word; text-overflow: ellipsis">{{ row[2] }}</td>
+                            <td style="width: 200px; overflow: auto; word-wrap: break-word; text-overflow: ellipsis"><a href='user/{{ row[3] }}'>{{ row[3] }}</a></td>
+                            <td style="max-width:100px">{{ row[4] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <!--Script js pour rechercher dans la table-->
+            <script>
+                function myFunction() {
+                    var input, filter, table, tr, td, i, txtValue;
+                    input = document.getElementById("myInput");
+                    filter = input.value.toUpperCase();
+                    table = document.getElementById("myTable");
+                    tr = table.getElementsByTagName("tr");
+                    for (i = 0; i < tr.length; i++) {
+                        td = tr[i].getElementsByTagName("td")[0];
+                        if (td) {
+                            txtValue = td.textContent || td.innerText;
+                            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";}
+                        else {
+                            tr[i].style.display = "none";
+                        }
+                        }
+                    }
+                }
+            </script>
+        </div>
+    </div>
+{% endblock body %}

@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    <link rel="stylesheet" href="../static/css/style_forum.css">
+{% endblock head %}
+
+{% block body %}
+
+    <div class="page-content">
+        <div class="form-v9-content" style="background-image: url('images/form-v9.jpg')">
+            <!--Entete-->
+            <div class="form-detail">
+                <h2>Jardin Copain</h2>
+            </div>
+            <!--Affichage du sujet-->
+            <div class="form-v9-vontent" style="margin-bottom:20px; word-wrap: break-word;">
+                <h1 style="color: #FB667A; margin-bottom:20px;">Sujet : </h1>
+                <p  style="color: #FB667A; margin-bottom:20px;">{{ sujet }}</p>
+                <h1 style= "margin-bottom:20px;">Message : </h1>
+                <p style= "margin-bottom:20px;">{{ message|safe }}</p>
+            </div>
+
+            <!--Bouton réponse-->
+            <div style="margin-bottom:20px;" class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700">
+                <a href='creerreponse?sujet={{ sujet }}&message={{ message }}&pseudo1={{ pseudo1 }}'>Répondre</a>
+            </div>
+            <!--Barre de recherche-->
+            <input style="margin:20px; margin-bottom:20px;" type="text" id="myInput" onkeyup="myFunction()" placeholder="Rechercher une réponse">
+            <br><br>
+
+            <!--Tableau des réponses-->
+            <table style= "width:1200px;" id = "myTable" class="container">
+                <thead>
+                    <tr>
+                        <th><h1>Réponses</h1></th>
+                        <th><h1>Auteur</h1></th>
+                        <th><h1>Date</h1></th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in listdb %}
+                        <tr> 
+                            <td style="color:white; max-width: 740px; overflow: auto; word-wrap: break-word; text-overflow: ellipsis">{{ row[0]|safe }}</td>
+                            <td style="width: 200px; overflow: auto; word-wrap: break-word; text-overflow: ellipsis"><a href='user/{{ row[1] }}'>{{ row[1] }}</a></td>
+                            <td style="max-width:200px;">{{ row[2] }}</td>
+
+                            
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+            <script>
+                function myFunction() {
+                    var input, filter, table, tr, td, i, txtValue;
+                    input = document.getElementById("myInput");
+                    filter = input.value.toUpperCase();
+                    table = document.getElementById("myTable");
+                    tr = table.getElementsByTagName("tr");
+                    for (i = 0; i < tr.length; i++) {
+                        td = tr[i].getElementsByTagName("td")[0];
+                        if (td) {
+                            txtValue = td.textContent || td.innerText;
+                            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";}
+                        else {
+                            tr[i].style.display = "none";
+                        }
+                        }
+                    }
+                }
+            </script>
+        </div>
+    </div>
+
+{% endblock body %}
